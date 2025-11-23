@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "chained",
+  "version": "${version}",
+  "name": "Chained",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/chained/icon.png",
+  "entrypoints": {
+    "fabric-datagen": [
+      "ru.kseonyt.chained.client.ChainedDataGenerator"
+    ],
+    "client": [
+      "ru.kseonyt.chained.client.ChainedClient"
+    ],
+    "main": [
+      "ru.kseonyt.chained.Chained"
+    ]
+  },
+  "mixins": [
+    "chained.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

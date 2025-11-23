@@ -1,0 +1,17 @@
+{
+  "chained.request.title": "Chain Request",
+  "chained.request.message": "%s wants to chain with you",
+  "chained.request.accept": "Accept",
+  "chained.request.decline": "Decline",
+  "chained.request.timeout": "Request expires in %s seconds",
+  "chained.request.sent": "Chain request sent to %s",
+  "chained.request.pending": "This player already has a pending request",
+  "chained.request.declined": "%s declined your chain request",
+  "chained.request.already_chained.sender": "You are already chained with someone",
+  "chained.request.already_chained.receiver": "This player is already chained with someone",
+  "chained.chain.created": "You are now chained with %s",
+  "chained.chain.broken": "Chain with %s has been broken",
+  "chained.chain.broken.death": "Chain has been broken due to death",
+  "chained.chain.broken.dragon_breath": "Chain has been broken by dragon's breath",
+  "chained.dimension.teleported": "You have been teleported to another dimension with your chained partner"
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "chained:custom/chains_body",
+  "textures": {
+    "2": "chained:block/chains_body",
+    "particle": "chained:item/iron_chain"
+  }
+}

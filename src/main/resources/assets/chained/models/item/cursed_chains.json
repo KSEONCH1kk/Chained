@@ -1,0 +1,20 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "chained:item/iron_chain"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "chained:cursed_chains_render_value": 1
+      },
+      "model": "chained:item/cursed_chains_0"
+    },
+    {
+      "predicate": {
+        "chained:cursed_chains_render_value": 2
+      },
+      "model": "chained:item/cursed_chains_1"
+    }
+  ]
+}

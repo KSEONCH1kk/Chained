@@ -1,0 +1,17 @@
+{
+  "chained.request.title": "Запрос на связывание",
+  "chained.request.message": "%s хочет связаться с вами цепью",
+  "chained.request.accept": "Принять",
+  "chained.request.decline": "Отклонить",
+  "chained.request.timeout": "Запрос истекает через %s сек.",
+  "chained.request.sent": "Запрос на связывание отправлен игроку %s",
+  "chained.request.pending": "У этого игрока уже есть активный запрос",
+  "chained.request.declined": "%s отклонил ваш запрос на связывание",
+  "chained.request.already_chained.sender": "Вы уже связаны с кем-то",
+  "chained.request.already_chained.receiver": "Этот игрок уже связан с кем-то",
+  "chained.chain.created": "Вы теперь связаны с %s",
+  "chained.chain.broken": "Связь с %s разорвана",
+  "chained.chain.broken.death": "Связь разорвана из-за смерти",
+  "chained.chain.broken.dragon_breath": "Связь разорвана драконьим дыханием",
+  "chained.dimension.teleported": "Вы были телепортированы в другое измерение вместе с вашим связанным партнёром"
+}

@@ -1,0 +1,62 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "chains",
+  "elements": [
+    {
+      "from": [
+        6.5,
+        8,
+        5
+      ],
+      "to": [
+        9.5,
+        8.1,
+        11
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "z",
+        "origin": [
+          8,
+          8,
+          10
+        ]
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            3,
+            6,
+            0,
+            0
+          ],
+          "texture": "#4"
+        },
+        "down": {
+          "uv": [
+            3,
+            6,
+            0,
+            0
+          ],
+          "texture": "#4"
+        }
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bone",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "color": 0,
+      "boneType": "",
+      "children": [
+        0
+      ]
+    }
+  ]
+}
