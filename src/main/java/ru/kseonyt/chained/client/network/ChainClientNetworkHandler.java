@@ -57,7 +57,6 @@ public class ChainClientNetworkHandler {
                     
                     // Создаем множество всех связей из пакета для быстрой проверки
                     java.util.Set<String> newLinks = new java.util.HashSet<>();
-                    java.util.Set<UUID> allPlayersInSync = new java.util.HashSet<>();
                     
                     for (ChainSyncPayload.ChainLink link : syncPayload.links()) {
                         // Создаем уникальный ключ для пары (меньший UUID всегда первый)
@@ -65,38 +64,32 @@ public class ChainClientNetworkHandler {
                             ? link.player1().toString() + "_" + link.player2().toString()
                             : link.player2().toString() + "_" + link.player1().toString();
                         newLinks.add(linkKey);
-                        allPlayersInSync.add(link.player1());
-                        allPlayersInSync.add(link.player2());
                     }
                     
-                    // Удаляем все старые связи, которых нет в новом пакете
-                    // Получаем копию всех текущих связей
-                    java.util.Map<UUID, java.util.Set<UUID>> currentChains = new java.util.HashMap<>();
-                    for (UUID playerId : allPlayersInSync) {
-                        currentChains.put(playerId, new java.util.HashSet<>(clientData.getChainedPlayers(playerId)));
-                    }
+                    // Получаем всех игроков, у которых есть связи на клиенте
+                    java.util.Set<UUID> allPlayersWithChains = clientData.getAllPlayersWithChains();
                     
-                    // Также проверяем всех игроков, у которых есть связи
-                    java.util.Set<UUID> allPlayersWithChains = new java.util.HashSet<>();
-                    for (UUID playerId : allPlayersInSync) {
-                        java.util.Set<UUID> neighbors = clientData.getChainedPlayers(playerId);
-                        allPlayersWithChains.add(playerId);
-                        allPlayersWithChains.addAll(neighbors);
-                    }
+                    // Собираем все текущие связи для удаления
+                    java.util.List<java.util.AbstractMap.SimpleEntry<UUID, UUID>> linksToRemove = new java.util.ArrayList<>();
                     
-                    // Удаляем все старые связи
                     for (UUID player1 : allPlayersWithChains) {
                         java.util.Set<UUID> oldNeighbors = new java.util.HashSet<>(clientData.getChainedPlayers(player1));
                         for (UUID player2 : oldNeighbors) {
-                            String linkKey = player1.compareTo(player2) < 0 
-                                ? player1.toString() + "_" + player2.toString()
-                                : player2.toString() + "_" + player1.toString();
-                            
-                            // Удаляем связь, если её нет в новом пакете
-                            if (!newLinks.contains(linkKey)) {
-                                clientData.removeChain(player1, player2);
+                            // Проверяем только один раз для каждой пары
+                            if (player1.compareTo(player2) < 0) {
+                                String linkKey = player1.toString() + "_" + player2.toString();
+                                
+                                // Добавляем в список для удаления, если связи нет в новом пакете
+                                if (!newLinks.contains(linkKey)) {
+                                    linksToRemove.add(new java.util.AbstractMap.SimpleEntry<>(player1, player2));
+                                }
                             }
                         }
+                    }
+                    
+                    // Удаляем все старые связи, которых нет в новом пакете
+                    for (java.util.AbstractMap.SimpleEntry<UUID, UUID> link : linksToRemove) {
+                        clientData.removeChain(link.getKey(), link.getValue());
                     }
                     
                     // Добавляем все новые связи из пакета

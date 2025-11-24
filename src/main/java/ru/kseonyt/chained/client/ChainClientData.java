@@ -64,6 +64,18 @@ public class ChainClientData {
     public void clear() {
         chains.clear();
     }
+    
+    /**
+     * Получает всех игроков, у которых есть связи (для синхронизации)
+     */
+    public Set<UUID> getAllPlayersWithChains() {
+        Set<UUID> result = new HashSet<>();
+        for (Map.Entry<UUID, Set<UUID>> entry : chains.entrySet()) {
+            result.add(entry.getKey());
+            result.addAll(entry.getValue());
+        }
+        return result;
+    }
 }
 
 
