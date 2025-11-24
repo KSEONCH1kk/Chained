@@ -4,3 +4,11 @@
 /build/classes/java/main/
 /run/
 /.idea/
+/versions/1.21.4/build/
+/versions/1.21.8/build/
+/versions/1.21.9/build/
+/versions/1.21.10/build/
+/versions/1.21.4/.gradle/
+/versions/1.21.8/.gradle/
+/versions/1.21.9/.gradle/
+/versions/1.21.10/.gradle/
