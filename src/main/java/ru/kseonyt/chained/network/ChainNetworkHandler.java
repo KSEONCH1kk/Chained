@@ -63,14 +63,13 @@ public class ChainNetworkHandler {
     public static void broadcastChainUpdate(ServerPlayerEntity player1, ServerPlayerEntity player2, boolean create) {
         ChainManager chainManager = ChainManager.getInstance();
         
-        // Находим всех игроков в связанной компоненте (цепочке)
-        Set<UUID> connectedComponent = chainManager.getConnectedComponent(player1.getUuid());
-        
-        // Собираем все связи в цепочке
+        // Собираем все текущие связи на сервере (после изменения)
+        Map<UUID, Set<UUID>> allChains = chainManager.getAllChains();
         List<ChainSyncPayload.ChainLink> links = new ArrayList<>();
-        for (UUID playerId : connectedComponent) {
-            Set<UUID> neighbors = chainManager.getChainedPlayers(playerId);
-            for (UUID neighborId : neighbors) {
+        
+        for (Map.Entry<UUID, Set<UUID>> entry : allChains.entrySet()) {
+            UUID playerId = entry.getKey();
+            for (UUID neighborId : entry.getValue()) {
                 // Добавляем только один раз для каждой пары (playerId < neighborId)
                 if (playerId.compareTo(neighborId) < 0) {
                     links.add(new ChainSyncPayload.ChainLink(playerId, neighborId));
@@ -78,7 +77,7 @@ public class ChainNetworkHandler {
             }
         }
         
-        // Отправляем синхронизацию всей цепочки всем игрокам на сервере
+        // Отправляем синхронизацию всех связей всем игрокам на сервере
         ChainSyncPayload syncPayload = new ChainSyncPayload(links);
         var server = player1.getServer();
         if (server != null) {
